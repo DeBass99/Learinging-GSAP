@@ -20,9 +20,9 @@
         <div class="hero">
           <div class="row">
             <div class="col-md-6">
-                <h1>Time For an Adventure</h1>
-                <p>Experience. Tourism. These are as education in themselves.</p>
-                <button>Buy Tickets</button>
+                <h1 class="text"><span>Time For an</span> <span>Adventure</span></h1>
+                <p class="text">Experience. Tourism. These are as education in themselves.</p>
+                <button class="text">Buy Tickets</button>
             </div>
             <div class="col-md-6">
                 <img src="monkey.png" alt="">
@@ -36,15 +36,27 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CSSRulePlugin.min.js"></script>
 
     <script>
+        // Css rule plugin
+        var rule = CSSRulePlugin.getRule("span::after"); 
+
         //Texts animation
-        gsap.from('h1', {opacity:0, y:-50, duration:1, delay:.3, ease: 'back.out'})
-        gsap.from('p', {opacity:0, y:-50, duration:1, delay:.5, ease: 'back.out'})
-       gsap.from('button', {opacity:0, y:-50, duration:1, delay:.7, ease: 'back.out'})
+       /* gsap.from('.text', {opacity:0, y:-50, duration:1, delay:.3, ease: 'back.out', stagger:0.3})
+        gsap.to(rule, {duration: 1, cssRule: {scaleY:0}});
 
        //Image animation
-       gsap.from('img', {x:80, opacity:0, ease:'power1.out', duration:.5})
+       gsap.from('img', {x:80, opacity:0, ease:'power1.out', duration:.5})*/
+
+       var tl = gsap.timeline({defaults:{duration:1}});
+
+        //Texts animation
+        tl.from('.text', {opacity:0, y:-50, duration:1, delay:.3, ease: 'back.out', stagger:0.3})
+         .to(rule, {duration: 1, cssRule: {scaleY:0}}, '-= -2')
+
+          //Image animation
+          .from('img', {x:80, opacity:0, ease:'power1.out', duration:.5}, '-= -1')
 
 
     </script>

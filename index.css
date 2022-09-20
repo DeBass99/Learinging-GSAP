@@ -31,6 +31,21 @@ h1{
     line-height: 85px;
 }
 
+span{ 
+    display: block;
+}
+
+span::after{ 
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    transform-origin: top;
+}
+
 p{ 
     font-style: normal;
     font-weight: 400;
