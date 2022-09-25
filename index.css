@@ -4,6 +4,9 @@
     background-repeat: no-repeat;
 }
 
+
+
+
 h1{ 
     font-style: normal;
     font-weight: 700;
@@ -22,7 +25,7 @@ h3{
 
 p{ 
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 22px;
     line-height: 26px;
     color: #fff;
@@ -37,7 +40,6 @@ p{
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-top: -50px;
     z-index: 3;
     background:none;
 }
@@ -99,6 +101,7 @@ button.btn{
     border: 1.5px solid #FFFFFF;
     border-radius: 5px;
     color: #fff;
+    transition: all .3s linear;
 }
 
 button.btn:hover{ 
@@ -114,6 +117,7 @@ button.btn:hover{
 
 .header-image{ 
     transform-origin: top;
+    width: 100%;
 }
 
 mark{ 
@@ -174,7 +178,7 @@ mark{
 }
 
 .card:hover .icon{
-    transform: scale(110%);
+    transform: scale(120%);
 }
 
 .icon{ 
@@ -223,4 +227,317 @@ mark{
     font-weight: 300;
     font-size: 18px;
     color: #fff;
+}
+
+.third-section{ 
+    background-image: url("images/tools bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 108px 0px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.third-section h3{
+    margin-top: 30px;
+}
+
+.third-section p{
+    margin-top: 10px;
+}
+
+hr{ 
+    margin-top: 90px;
+}
+
+.forth-section{ 
+    margin-top: 54px;
+}
+
+.cards{ 
+margin-top: 80px;
+}
+
+.dev{ 
+    width: 282px;
+    height: 304px;
+    border-radius: 5px;
+    background-image: url("images/dev 1.png");
+    background-size: 100%;
+    text-align: left;
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0px;
+    transition: all 1s linear;
+    transform-origin: center;
+}
+
+.dev:hover{ 
+    background-size: 110%;
+}
+
+.dev2{ 
+    background-image: url("images/dev 2.png");
+}
+
+.dev3{ 
+    background-image: url("images/dev 3.png");
+}
+
+.dev4{ 
+    background-image: url("images/dev 4.png");
+}
+
+.dev5{ 
+    background-image: url("images/dev 5.png");
+}
+
+.dev6{ 
+    background-image: url("images/dev 6.png");
+}
+
+
+.items{ 
+    display: flex;
+    justify-content: space-between;
+}
+
+.dev h5{ 
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #fff;
+}
+
+.dev p{ 
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    color: #fff;
+}
+
+.dev-body{ 
+    width: 100%;
+    height: 75px!important;
+    background: rgba(9, 7, 7, 0.4);
+    backdrop-filter: blur(12.5px);
+    border-radius: 5px 5px 0px 0px;
+    margin-top: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.text{ 
+    display: flex;
+    align-items: center;
+}
+
+.text img{ 
+    width: 20px;
+    height: 20px;
+}
+
+.text p{ 
+    margin-left: 6px;
+}
+
+.forth-btn{ 
+    display: flex;
+    justify-content: center;
+}
+
+.forth-btn button{ 
+    width: 204px;
+    height: 50px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    padding: 16px 30px;
+    margin-left: 40px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #3775ED;
+    margin-top: 85px;
+}
+
+.fifth-section{ 
+    margin-top: 62px;
+    text-align: center;
+}
+
+.user{ 
+    width: 100%;
+    height: 190px;
+    padding: 21px 19px;
+    background: #1A1919;
+    border-radius: 5px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.name{ 
+    display: flex;
+    text-align: left;
+}
+
+.name img{ 
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.name p{ 
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.sixth-section{ 
+    background-image: url("images/chill bg.png");
+    background-size: 100%;
+    border-radius: 10px;
+    margin: 150px 0px;
+    padding: 150px 90px;
+    transition: all 1s linear;
+    transform-origin: center;
+}
+
+.sixth-section:hover{ 
+    background-size: 105%;
+}
+
+.call{ 
+    text-align: center;
+    background: #3775ED;
+    border-radius: 10px;
+    padding: 52px 0px;
+    margin: 54px 0px;
+}
+
+
+.call p{ 
+    margin-top: 14px;
+}
+
+.call button{ 
+    margin-top: 14px;
+    background: #1A1919;
+    border-radius: 5px;
+    width: 204px;
+    height: 50px;
+    color: #fff;
+    border: none;
+    transition: all .3s linear;
+}
+
+.call button:hover{
+    border: 1px solid #fff;
+    color: #fff;
+    background: #3775ED;
+}
+
+.footer{ 
+    margin: 60px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.footer a{ 
+    text-decoration: none;
+}
+
+.two ul{ 
+    list-style: none;
+    display: flex;
+}
+
+.two ul li{ 
+    margin: 0px 10px;
+}
+
+.two ul li svg{ 
+    width: 35px;
+    height: 35px;
+}
+
+.facebook svg {    width: 100px;    height: 100px; transition: all .5s linear;} .facebook svg:hover path {    fill: #3b5998;}
+.twitter svg {    width: 100px;    height: 100px; transition: all .5s linear;} .twitter svg:hover path {    fill: #00acee;}
+.linkedin svg {    width: 100px;    height: 100px; transition: all .5s linear;} .linkedin svg:hover path {    fill: #0e76a8;}
+.instagram svg {    width: 100px;    height: 100px; transition: all .5s linear;}.instagram svg:hover path {    fill: #fbad50;}
+
+
+@media only screen and (max-width:600px){ 
+
+    body{ 
+        overflow-x: hidden;
+    }
+
+    h1{ 
+        font-size: 48px;
+    }
+
+    .cta button{ 
+    margin: 10px 0px;
+    }
+
+    .card{ 
+        margin: 0px;
+    }
+
+    .card-group{ 
+        justify-content: center;
+    }
+
+    .third-section{ 
+        background: none;
+        background-color: #191919;
+        padding: 10px;
+    }
+
+    .third-section p{ 
+        margin-top: 30px;
+    }
+
+    .cards{ 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sixth-section{ 
+        background-repeat: no-repeat;
+        padding: 0px;
+    }
+
+    .sixth-text{
+        margin-top: 190px;
+    }
+
+    .call{ 
+        padding: 20px 10px;
+    }
+
+
+
+    .footer{ 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .two{ 
+        margin: 40px 0px;
+    }
+
+    button.btn{ 
+        margin: 0px;
+    }
 }
