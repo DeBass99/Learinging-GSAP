@@ -55,7 +55,9 @@
                     <button class="started">Get started</button>
                     <button class="featured">Get featured</button>
                 </div>
-                <img class="header-image" src="images\header image.png" alt="">
+                <div class="image section-move">
+                <img class="header-image move-me" src="images\header image.png" alt="">
+              </div>
             </div>
         </div>
 
@@ -446,6 +448,7 @@
                 trigger:'.card',
                 toggleActions: 'restart none none reset',
                 start: 'top bottom',
+                scrub: 1,
                 duration:1.5,
                 ease: 'back.out'
             },
@@ -460,6 +463,8 @@
                 trigger:'.dev',
                 toggleActions: 'restart none none reset',
                 start: 'top bottom',
+                end: 'center center',
+                scrub: 1,
                 duration:.8,
                 ease:'back.out'
             },
@@ -468,6 +473,39 @@
             duration: .5,
             stagger: .3
         });
+
+
+        const hoverThis = document.querySelector('.section-move');
+hoverThis.addEventListener('mousemove', mouseMoveAnim )
+
+function mouseMoveAnim(e) {
+    
+    var xPos = (e.clientX/window.innerWidth - 0.5);
+    var yPos = (e.clientY/window.innerHeight - 0.5);
+      
+    gsap.to('.move-me', { 
+      duration: 0.1,
+      rotationY: 20 * xPos, 
+      rotationX: -20 * yPos,
+      x: -150 * xPos,
+      y: -150 * yPos,
+      ease: "power1.inOut",
+      transformPerspective: 2000,
+      transformOrigin: 'center'
+    });
+  
+}
+
+hoverThis.onmouseenter = function(){    
+  hoverThis.addEventListener('mousemove', mouseMoveAnim )
+};
+
+hoverThis.onmouseleave = function(){  
+  hoverThis.removeEventListener('mousemove', mouseMoveAnim )
+  gsap.to('.move-me', 
+          { delay: 0.1, duration: 0.7, rotationY: 0, rotationX: 0, x: 0, y: 0, ease: "power1.inOut" })
+  
+};
 
        
 
