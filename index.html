@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
     <link rel="stylesheet" href="index.css">
     <title>Gsap</title>
 </head>
-<body>
+<body id="scrollContainer" data-scroll-container="''" class="scrollContainer">
+  
   <div id="smooth-wrapper">
     <div id="smooth-content">
      <div class="loading">
@@ -20,7 +22,7 @@
     <div class="load-bg"></div>
     <div class="load-bg second"></div> 
 
-
+    <main data-barba="container" data-barba-namespace="home">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-light">
             <div class="container-fluid">
@@ -31,10 +33,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link link" aria-current="page" href="#">Features</a>
+                    <a class="nav-link link" aria-current="page" id="home" href="index.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link link" aria-current="page" href="#">Pricing</a>
+                    <a class="nav-link link" aria-current="page" href="developers.html">Developers</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link link" aria-current="page" href="#">Learn</a>
@@ -399,8 +401,10 @@
 
 
         </div>
+      </main>
       </div>
       </div>
+    
 
        
 
@@ -411,11 +415,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
-  
-
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.0.4/dist/locomotive-scroll.min.js"></script>
 
     <script>
 
+
+
+      //Window scroll to top on page reload
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         } else {
@@ -424,10 +430,12 @@
             }
         }
 
-        // Css rule plugin
-        var rule = CSSRulePlugin.getRule("span::after"); 
+        
+           
 
-        //defining timeline
+
+        
+        //defining timeline of loading animation
        var tl = gsap.timeline({defaults:{duration:1}})
 
         //Loading animation
@@ -439,8 +447,70 @@
         //Header image animation
         .from('.header-image', {opacity:0, y: -50, duration: 1});
 
-        //card slideIn
-        gsap.registerPlugin( ScrollTrigger );
+        //Header image hover animation
+        const hoverThis = document.querySelector('.section-move');
+        hoverThis.addEventListener('mousemove', mouseMoveAnim )
+
+        function mouseMoveAnim(e) {
+    
+    var xPos = (e.clientX/window.innerWidth - 0.5);
+    var yPos = (e.clientY/window.innerHeight - 0.5);
+      
+    gsap.to('.move-me', { 
+      duration: 0.1,
+      rotationY: 20 * xPos, 
+      rotationX: -20 * yPos,
+      x: -150 * xPos,
+      y: -150 * yPos,
+      ease: "power1.inOut",
+      transformPerspective: 2000,
+      transformOrigin: 'center'
+    });
+  
+        }
+
+        hoverThis.onmouseenter = function(){    
+          hoverThis.addEventListener('mousemove', mouseMoveAnim )
+        };
+
+        hoverThis.onmouseleave = function(){  
+          hoverThis.removeEventListener('mousemove', mouseMoveAnim )
+          gsap.to('.move-me', 
+                  { delay: 0.1, duration: 0.7, rotationY: 0, rotationX: 0, x: 0, y: 0, ease: "power1.inOut" })
+          
+        };
+
+
+            //timeout functions
+            setTimeout(function(){
+
+          //display hidden content after loading animation functiton
+         document.querySelector('.time').className = "";
+
+       //Locomotive scroll 
+      const locoScroll = new LocomotiveScroll({
+      el: document.querySelector(".scrollContainer"),
+      smooth: true
+       });
+      
+       locoScroll.on("scroll", ScrollTrigger.update);
+
+      // tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element since Locomotive Scroll is hijacking things
+      ScrollTrigger.scrollerProxy(".scrollContainer", {
+        scrollTop(value) {
+          return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+        }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+        getBoundingClientRect() {
+          return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+        },
+        // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+        pinType: document.querySelector(".scrollContainer").style.transform ? "transform" : "fixed"
+      });
+
+       
+
+           //card slideIn
+           gsap.registerPlugin( ScrollTrigger );
         
         //cards slide
        gsap.from('.card',{
@@ -448,6 +518,7 @@
                 trigger:'.card',
                 toggleActions: 'restart none none reset',
                 start: 'top bottom',
+                scroller: '.scrollContainer',
                 scrub: 1,
                 duration:1.5,
                 ease: 'back.out'
@@ -464,6 +535,7 @@
                 toggleActions: 'restart none none reset',
                 start: 'top bottom',
                 end: 'center center',
+                scroller: '.scrollContainer',
                 scrub: 1,
                 duration:.8,
                 ease:'back.out'
@@ -474,41 +546,20 @@
             stagger: .3
         });
 
+        //locomotive scroll setup
+      ScrollTrigger.addEventListener('refresh', () => 
+       locoScroll.update());
 
-        const hoverThis = document.querySelector('.section-move');
-hoverThis.addEventListener('mousemove', mouseMoveAnim )
+       ScrollTrigger.refresh();
 
-function mouseMoveAnim(e) {
-    
-    var xPos = (e.clientX/window.innerWidth - 0.5);
-    var yPos = (e.clientY/window.innerHeight - 0.5);
-      
-    gsap.to('.move-me', { 
-      duration: 0.1,
-      rotationY: 20 * xPos, 
-      rotationX: -20 * yPos,
-      x: -150 * xPos,
-      y: -150 * yPos,
-      ease: "power1.inOut",
-      transformPerspective: 2000,
-      transformOrigin: 'center'
-    });
-  
-}
+}, 3000);
 
-hoverThis.onmouseenter = function(){    
-  hoverThis.addEventListener('mousemove', mouseMoveAnim )
-};
+     
 
-hoverThis.onmouseleave = function(){  
-  hoverThis.removeEventListener('mousemove', mouseMoveAnim )
-  gsap.to('.move-me', 
-          { delay: 0.1, duration: 0.7, rotationY: 0, rotationX: 0, x: 0, y: 0, ease: "power1.inOut" })
-  
-};
 
-       
 
+
+         
 
    
 
